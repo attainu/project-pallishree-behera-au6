@@ -7,7 +7,28 @@ class ProfileTabs extends Component {
         const { following, followers, posts } = this.props;
         return (
             <div>
-                <div className="row">
+                <div className="row " >
+                <div className="col-md-4">
+                        <p className="text-primary text-white" >{posts.length} Posts</p>
+                        <hr />
+                        {posts.map((post, i) => (
+                            <div key={i}>
+                                <div>
+                                    <Link to={`/post/${post._id}`}>
+                                        <div>
+                                            <p>{post.title}</p>
+                                            <img src={`${process.env.REACT_APP_API_URL}/post/photo/${post._id}`} width="100%" height="100%" />
+                                        </div>
+                                    </Link>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+
+
+
+
+
                     <div className="col-md-4">
                         <p className="text-primary">
                             {followers.length} Followers
@@ -80,21 +101,7 @@ class ProfileTabs extends Component {
                         ))}
                     </div>
 
-                    <div className="col-md-4">
-                        <p className="text-primary">{posts.length} Posts</p>
-                        <hr />
-                        {posts.map((post, i) => (
-                            <div key={i}>
-                                <div>
-                                    <Link to={`/post/${post._id}`}>
-                                        <div>
-                                            <p>{post.title}</p>
-                                        </div>
-                                    </Link>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
+                   
                 </div>
             </div>
         );

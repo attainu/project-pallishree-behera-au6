@@ -1,18 +1,24 @@
 import React, { Fragment } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { signout, isAuthenticated } from "../auth";
+import DefaultProfile from "../images/avatar.jpg";
 
 const isActive = (history, path) => {
   if (history.location.pathname === path) return { color: "#ccc" };
   else return { color: "#ffffff" };
 };
+const photoUrl =isAuthenticated()
+? `${process.env.REACT_APP_API_URL}/user/photo/${
+  isAuthenticated().user._id
+  }?${new Date().getTime()}`
+: DefaultProfile;
 
 const Menu = ({ history }) => (
   
   <nav className="navbar navbar-expand-lg navbar-light " style={{background:'#30336b'}}>
     <div className="container" >
       <Link className="navbar-brand" to="/" style={isActive(history, "/")}>
-        Facebook
+      Timepass
       </Link>
       <button
         className="navbar-toggler"
@@ -108,7 +114,9 @@ const Menu = ({ history }) => (
                   )}
                   className="nav-link"
                 >
+                {/*   <img src={photoUrl} onError={i => (i.target.src = `${DefaultProfile}`)} width="50px" height="50px" style={{borderRadius:"50%"}} />  */}
                   {`${isAuthenticated().user.name}'s profile`}
+                  {/* <img src={} /> */}
                 </Link>
               </li>
 
